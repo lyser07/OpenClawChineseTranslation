@@ -81,11 +81,16 @@ jobs:
           OUTPUT=$(node cli/index.mjs apply --verbose 2>&1) || true
           echo "$OUTPUT"
           
-          # 提取统计信息
-          APPLIED=$(echo "$OUTPUT" | grep -oP '应用 \K\d+' | tail -1 || echo "0")
-          EXISTED=$(echo "$OUTPUT" | grep -oP '已存在 \K\d+' | tail -1 || echo "0")
-          FAILED=$(echo "$OUTPUT" | grep -oP '未找到 \K\d+' | tail -1 || echo "0")
+          # 提取统计信息（使用 sed 替代 grep -P，兼容性更好）
+          APPLIED=$(echo "$OUTPUT" | grep "总计:" | sed 's/.*应用 \([0-9]*\).*/\1/' || echo "0")
+          EXISTED=$(echo "$OUTPUT" | grep "总计:" | sed 's/.*已存在 \([0-9]*\).*/\1/' || echo "0")
+          FAILED=$(echo "$OUTPUT" | grep "总计:" | sed 's/.*未找到 \([0-9]*\).*/\1/' || echo "0")
           FILES_COUNT=$(echo "$OUTPUT" | grep -c "替换:" || echo "0")
+          
+          # 如果提取失败，设置默认值
+          [ -z "$APPLIED" ] && APPLIED="0"
+          [ -z "$EXISTED" ] && EXISTED="0"
+          [ -z "$FAILED" ] && FAILED="0"
           
           echo "applied=$APPLIED" >> $GITHUB_OUTPUT
           echo "existed=$EXISTED" >> $GITHUB_OUTPUT
