@@ -1,0 +1,51 @@
+# ============================================================
+# OpenClaw 汉化发行版 - Docker Compose 配置
+# 
+# 快速启动:
+#   docker-compose up -d
+#
+# 首次运行会自动初始化配置。
+# 远程访问请参考 README.md 中的配置说明。
+#
+# 官方网站: https://openclaw.ai/
+# 汉化项目: https://openclaw.qt.cool/
+# ============================================================
+
+version: '3.8'
+
+services:
+  openclaw:
+    image: ghcr.io/qingchencloud/openclaw-zh:latest
+    container_name: openclaw
+    ports:
+      - "18789:18789"
+    volumes:
+      # 数据持久化（注意：容器以 root 用户运行，配置存储在 /root/.openclaw）
+      - openclaw-data:/root/.openclaw
+    environment:
+      # 访问令牌（推荐设置，用于 Dashboard 认证）
+      - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN:-}
+    restart: unless-stopped
+    # 
+    # ========== 远程访问配置 ==========
+    # 
+    # 如果需要从其他设备访问（非 localhost），需要：
+    # 1. 首次启动后，执行以下命令初始化远程访问配置：
+    #    docker-compose exec openclaw openclaw config set gateway.mode local
+    #    docker-compose exec openclaw openclaw config set gateway.bind lan
+    #    docker-compose exec openclaw openclaw config set gateway.controlUi.allowInsecureAuth true
+    # 
+    # 2. 重启容器并使用 gateway run 命令：
+    #    取消下面 command 的注释，然后执行 docker-compose up -d
+    # 
+    # command: openclaw gateway run
+    #
+    # ========== 或者使用一键脚本 ==========
+    # 
+    # 推荐使用一键部署脚本自动完成所有配置：
+    #   curl -fsSL https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.sh | bash
+    #
+
+volumes:
+  openclaw-data:
+    name: openclaw-data

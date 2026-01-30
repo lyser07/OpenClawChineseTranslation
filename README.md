@@ -270,26 +270,99 @@ openclaw --help             # 查看帮助
 
 ## 🐳 Docker 部署指南
 
-### 快速启动
+### 方式 1：一键部署脚本（推荐）
+
+自动完成初始化、配置远程访问、启动容器：
 
 ```bash
-# 基础运行
+# Linux / macOS
+curl -fsSL https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.sh | bash
+
+# Windows PowerShell
+irm https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.ps1 | iex
+```
+
+### 方式 2：快速启动（本地访问）
+
+适用于在本机运行并通过 `localhost` 访问：
+
+```bash
+# 基础运行（数据不持久化）
 docker run -d \
   --name openclaw \
   -p 18789:18789 \
   ghcr.io/qingchencloud/openclaw-zh:latest
 
-# 带数据持久化
+# 带数据持久化（推荐）
 docker run -d \
   --name openclaw \
   -p 18789:18789 \
-  -v openclaw-data:/home/node/.openclaw \
+  -v openclaw-data:/root/.openclaw \
   ghcr.io/qingchencloud/openclaw-zh:latest
 ```
 
+访问：`http://localhost:18789`
+
+### 方式 3：服务器部署（远程访问）
+
+部署到服务器并从其他设备访问时，需要额外配置。
+
+**手动配置步骤：**
+
+```bash
+# 1. 创建数据卷
+docker volume create openclaw-data
+
+# 2. 初始化配置
+docker run --rm -v openclaw-data:/root/.openclaw \
+  ghcr.io/qingchencloud/openclaw-zh:latest openclaw setup
+
+# 3. 配置远程访问参数
+docker run --rm -v openclaw-data:/root/.openclaw \
+  ghcr.io/qingchencloud/openclaw-zh:latest openclaw config set gateway.mode local
+
+docker run --rm -v openclaw-data:/root/.openclaw \
+  ghcr.io/qingchencloud/openclaw-zh:latest openclaw config set gateway.bind lan
+
+docker run --rm -v openclaw-data:/root/.openclaw \
+  ghcr.io/qingchencloud/openclaw-zh:latest openclaw config set gateway.controlUi.allowInsecureAuth true
+
+# 4. 启动容器
+docker run -d \
+  --name openclaw \
+  -p 18789:18789 \
+  -v openclaw-data:/root/.openclaw \
+  -e OPENCLAW_GATEWAY_TOKEN=your-secure-token \
+  --restart unless-stopped \
+  ghcr.io/qingchencloud/openclaw-zh:latest \
+  openclaw gateway run
+```
+
+访问：`http://服务器IP:18789?token=your-secure-token`
+
+### 远程访问注意事项
+
+通过 HTTP 从非 localhost 访问时，浏览器会限制某些安全功能（设备身份验证）。
+
+| 方案 | 说明 | 适用场景 |
+|------|------|----------|
+| **启用 allowInsecureAuth** | 仅使用 Token 认证 | 内网/测试环境 |
+| **使用 HTTPS** | Tailscale Serve 或 Nginx 反向代理 | 生产环境（推荐） |
+| **SSH 端口转发** | `ssh -L 18789:127.0.0.1:18789 user@server` | 临时访问 |
+
 ### 使用 Docker Compose
 
-创建 `docker-compose.yml`：
+项目提供了开箱即用的 `docker-compose.yml`：
+
+```bash
+# 下载配置文件
+curl -fsSL https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-compose.yml -o docker-compose.yml
+
+# 启动（首次会自动初始化）
+docker-compose up -d
+```
+
+或手动创建 `docker-compose.yml`：
 
 ```yaml
 version: '3.8'
@@ -300,19 +373,15 @@ services:
     ports:
       - "18789:18789"
     volumes:
-      - openclaw-data:/home/node/.openclaw
+      - openclaw-data:/root/.openclaw
     environment:
-      - OPENCLAW_GATEWAY_TOKEN=your-secure-token  # 可选：设置访问令牌
+      - OPENCLAW_GATEWAY_TOKEN=your-secure-token  # 设置访问令牌
     restart: unless-stopped
+    # 远程访问时使用以下命令（需先手动初始化配置）
+    # command: openclaw gateway run
 
 volumes:
   openclaw-data:
-```
-
-启动：
-
-```bash
-docker-compose up -d
 ```
 
 ### 自行构建 Docker 镜像
@@ -335,7 +404,7 @@ cd openclaw
 docker build -t openclaw-zh:local .
 
 # 5. 运行
-docker run -d --name openclaw -p 18789:18789 openclaw-zh:local
+docker run -d --name openclaw -p 18789:18789 -v openclaw-data:/root/.openclaw openclaw-zh:local
 ```
 
 ### 常用 Docker 命令
@@ -355,13 +424,10 @@ docker exec -it openclaw sh
 
 # 删除容器
 docker stop openclaw && docker rm openclaw
+
+# 查看配置
+docker run --rm -v openclaw-data:/root/.openclaw alpine cat /root/.openclaw/openclaw.json
 ```
-
-### 访问 Dashboard
-
-启动后访问：`http://localhost:18789`
-
-如果设置了令牌，使用：`http://localhost:18789/?token=your-secure-token`
 
 ---
 
