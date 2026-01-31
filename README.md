@@ -612,6 +612,40 @@ npm uninstall -g @qingchencloud/openclaw-zh
 npm install -g openclaw
 ```
 
+### Q: 如何彻底卸载？
+
+**Windows (PowerShell):**
+```powershell
+# 卸载汉化版
+npm uninstall -g @qingchencloud/openclaw-zh
+
+# 卸载原版（如果也安装了）
+npm uninstall -g openclaw
+
+# 清理配置文件（可选，会删除所有数据）
+Remove-Item -Recurse -Force "$env:USERPROFILE\.openclaw"
+
+# 验证卸载
+openclaw --version  # 应提示命令不存在
+```
+
+**Linux / macOS:**
+```bash
+# 卸载汉化版
+npm uninstall -g @qingchencloud/openclaw-zh
+
+# 卸载原版（如果也安装了）
+npm uninstall -g openclaw
+
+# 清理配置文件（可选，会删除所有数据）
+rm -rf ~/.openclaw
+
+# 验证卸载
+openclaw --version  # 应提示命令不存在
+```
+
+> ⚠️ **注意**：`npm uninstall openclaw` 不会卸载汉化版，必须使用完整包名 `@qingchencloud/openclaw-zh`
+
 ### Q: Dashboard 如何访问？
 
 启动 OpenClaw 后，访问 `http://localhost:18789` 即可打开网页控制台（全中文界面）。
