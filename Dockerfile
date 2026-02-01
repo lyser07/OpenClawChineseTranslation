@@ -34,6 +34,11 @@ WORKDIR /app
 # 复制所有构建好的代码
 COPY . .
 
+# 重新安装原生依赖以匹配当前架构（解决 ARM64 兼容性问题）
+# 这会下载正确架构的 @mariozechner/clipboard 等原生模块
+RUN npm rebuild || true
+RUN npm install --prefer-offline --no-audit || true
+
 # 全局安装（使用 npm install -g . 而不是 npm link）
 RUN npm install -g .
 
