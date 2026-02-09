@@ -150,6 +150,9 @@ export function printStats(allStats, options = {}) {
   
   console.log(`总计: 应用 ${totalAppliedStr} | 已存在 ${totalSkipped} | 未找到 ${totalNotFoundStr}`);
   
+  // 机器可读的统计行，用于 CI/CD 提取（不含 ANSI 颜色码）
+  console.log(`##STATS##applied=${totalApplied}|existed=${totalSkipped}|failed=${totalNotFound}##`);
+  
   if (dryRun) {
     log.warn('\n🔍 预览模式 - 未实际修改任何文件');
   } else if (verify) {

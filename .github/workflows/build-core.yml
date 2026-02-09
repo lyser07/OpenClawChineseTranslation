@@ -107,19 +107,24 @@ jobs:
           OUTPUT=$(node cli/index.mjs apply --verbose 2>&1) || true
           echo "$OUTPUT"
           
-          # 先剥离 ANSI 颜色码，防止干扰数字提取
-          CLEAN=$(echo "$OUTPUT" | sed 's/\x1b\[[0-9;]*m//g')
+          # 从机器可读的统计行提取数据（格式: ##STATS##applied=N|existed=N|failed=N##）
+          STATS_LINE=$(echo "$OUTPUT" | grep -o '##STATS##[^#]*##' | head -1)
           
-          # 提取统计信息（使用 ^ 锚定只匹配汇总行，避免 verbose 日志干扰）
-          APPLIED=$(echo "$CLEAN" | grep "^总计:" | sed 's/.*应用 \([0-9]*\).*/\1/' || echo "0")
-          EXISTED=$(echo "$CLEAN" | grep "^总计:" | sed 's/.*已存在 \([0-9]*\).*/\1/' || echo "0")
-          FAILED=$(echo "$CLEAN" | grep "^总计:" | sed 's/.*未找到 \([0-9]*\).*/\1/' || echo "0")
+          if [ -n "$STATS_LINE" ]; then
+            APPLIED=$(echo "$STATS_LINE" | grep -o 'applied=[0-9]*' | cut -d= -f2)
+            EXISTED=$(echo "$STATS_LINE" | grep -o 'existed=[0-9]*' | cut -d= -f2)
+            FAILED=$(echo "$STATS_LINE" | grep -o 'failed=[0-9]*' | cut -d= -f2)
+          fi
+          
+          # 统计替换操作次数（剥离 ANSI 后计数）
+          CLEAN=$(echo "$OUTPUT" | sed $'s/\x1b\\[[0-9;]*m//g')
           FILES_COUNT=$(echo "$CLEAN" | grep -c "^  替换:" || echo "0")
           
-          # 如果提取失败，设置默认值（确保是纯数字）
+          # 确保所有值都是纯数字，防止写入 GITHUB_OUTPUT 时出错
           [[ ! "$APPLIED" =~ ^[0-9]+$ ]] && APPLIED="0"
           [[ ! "$EXISTED" =~ ^[0-9]+$ ]] && EXISTED="0"
           [[ ! "$FAILED" =~ ^[0-9]+$ ]] && FAILED="0"
+          [[ ! "$FILES_COUNT" =~ ^[0-9]+$ ]] && FILES_COUNT="0"
           
           echo "applied=$APPLIED" >> $GITHUB_OUTPUT
           echo "existed=$EXISTED" >> $GITHUB_OUTPUT
