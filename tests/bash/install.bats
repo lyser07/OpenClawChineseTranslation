@@ -243,19 +243,23 @@ SCRIPT_PATH="$(cd "$(dirname "$BATS_TEST_FILENAME")/../.." && pwd)/install.sh"
 }
 
 @test "run_setup_if_needed OPENCLAW_SKIP_SETUP=1 跳过" {
+    # 必须先清除 CI 变量，否则函数会优先匹配 CI 分支
+    local saved_ci="${CI:-}"
+    unset CI
     export OPENCLAW_SKIP_SETUP="1"
     
     source "$SCRIPT_PATH"
     
-    # 直接调用函数并捕获输出，避免 Bats run 子进程丢失函数/变量
-    local func_output
-    func_output=$(run_setup_if_needed 2>&1)
-    local func_status=$?
-    [ "$func_status" -eq 0 ]
+    run run_setup_if_needed
+    [ "$status" -eq 0 ]
     # 剥离 ANSI 转义码后匹配
     local clean_output
-    clean_output=$(echo "$func_output" | sed $'s/\033\\[[0-9;]*m//g')
+    clean_output=$(echo "$output" | sed $'s/\033\\[[0-9;]*m//g')
     [[ "$clean_output" == *"OPENCLAW_SKIP_SETUP"* ]]
     
     unset OPENCLAW_SKIP_SETUP
+    # 恢复 CI 变量
+    if [ -n "$saved_ci" ]; then
+        export CI="$saved_ci"
+    fi
 }
