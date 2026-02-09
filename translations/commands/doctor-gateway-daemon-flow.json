@@ -12,9 +12,6 @@
     "note(\"Gateway service not installed.\", \"Gateway\")": "note(\"网关服务未安装。\", \"网关\")",
     "message: \"Install gateway service now?\"": "message: \"现在安装网关服务？\"",
     "message: \"Gateway service runtime\"": "message: \"网关服务运行时\"",
-    "note(\"Gateway installed.\", \"Gateway\")": "note(\"网关已安装。\", \"网关\")",
-    "note(\"Gateway service started.\", \"Gateway\")": "note(\"网关服务已启动。\", \"网关\")",
-    "message: \"Restart gateway now?\"": "message: \"现在重启网关？\"",
-    "note(\"Gateway restarted.\", \"Gateway\")": "note(\"网关已重启。\", \"网关\")"
+    "message: \"Restart gateway service now?\"": "message: \"现在重启网关服务？\""
   }
 }

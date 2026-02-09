@@ -2,11 +2,11 @@
   "file": "ui/src/ui/views/config-form.render.ts",
   "description": "Dashboard 配置页面章节标签和描述",
   "replacements": {
-    "label: \"Environment Variables\", description: \"Environment variables passed to the gateway process\"": "label: \"环境变量\", description: \"传递给网关进程的环境变量\"",
+    "label: \"Environment Variables\",\n    description: \"Environment variables passed to the gateway process\"": "label: \"环境变量\",\n    description: \"传递给网关进程的环境变量\"",
     "label: \"Updates\", description: \"Auto-update settings and release channel\"": "label: \"更新\", description: \"自动更新设置和发布渠道\"",
     "label: \"Agents\", description: \"Agent configurations, models, and identities\"": "label: \"代理\", description: \"代理配置、模型和身份\"",
     "label: \"Authentication\", description: \"API keys and authentication profiles\"": "label: \"身份验证\", description: \"API 密钥和认证配置\"",
-    "label: \"Channels\", description: \"Messaging channels (Telegram, Discord, Slack, etc.)\"": "label: \"渠道\", description: \"消息渠道 (Telegram、Discord、Slack 等)\"",
+    "label: \"Channels\",\n    description: \"Messaging channels (Telegram, Discord, Slack, etc.)\"": "label: \"渠道\",\n    description: \"消息渠道 (Telegram、Discord、Slack 等)\"",
     "label: \"Messages\", description: \"Message handling and routing settings\"": "label: \"消息\", description: \"消息处理和路由设置\"",
     "label: \"Commands\", description: \"Custom slash commands\"": "label: \"命令\", description: \"自定义斜杠命令\"",
     "label: \"Hooks\", description: \"Webhooks and event hooks\"": "label: \"钩子\", description: \"Webhooks 和事件钩子\"",

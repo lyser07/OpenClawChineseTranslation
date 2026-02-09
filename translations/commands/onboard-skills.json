@@ -18,7 +18,7 @@
     "\"Skip for now\"": "\"暂时跳过\"",
     "\"Continue without installing dependencies\"": "\"不安装依赖继续\"",
     "prompter.progress(`Installing ${name}…`)": "prompter.progress(`正在安装 ${name}…`)",
-    "spin.stop(`Installed ${name}`)": "spin.stop(`已安装 ${name}`)",
+    "`Installed ${name}`": "`已安装 ${name}`",
     "` (exit ${result.code})`": "` (退出码 ${result.code})`",
     "spin.stop(`Install failed: ${name}${code}${detail ? ` — ${detail}` : \"\"}`)": "spin.stop(`安装失败: ${name}${code}${detail ? ` — ${detail}` : \"\"}`)",
     "`Tip: run \\`${formatCliCommand(\"openclaw doctor\")}\\` to review skills + requirements.`": "`提示: 运行 \\`${formatCliCommand(\"openclaw doctor\")}\\` 查看技能和依赖状态。`",

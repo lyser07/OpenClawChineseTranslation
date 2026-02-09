@@ -4,9 +4,9 @@
   "replacements": {
     "'What now: https://openclaw.ai/showcase (\"What People Are Building\").'": "'接下来做什么：查看 https://openclaw.ai/showcase (\"大家都在用 OpenClaw 做什么\")\\n\\n💡 汉化版更新：https://openclaw.qt.cool/'",
     "\"What now\"": "\"接下来\"",
-    "\"Onboarding complete. Dashboard opened with your token; keep that tab to control OpenClaw.\"": "\"初始化完成！已打开控制面板；保持该标签页以控制 OpenClaw。\\n\\n🔗 汉化版官网：https://openclaw.qt.cool/\"",
-    "\"Onboarding complete. Web UI seeded in the background; open it anytime with the tokenized link above.\"": "\"初始化完成！Web UI 已在后台准备就绪；随时可用上面的链接打开。\\n\\n🔗 汉化版官网：https://openclaw.qt.cool/\"",
-    "\"Onboarding complete. Use the tokenized dashboard link above to control OpenClaw.\"": "\"初始化完成！使用上面的链接打开控制面板。\\n\\n🔗 汉化版官网：https://openclaw.qt.cool/\"",
+    "\"Onboarding complete. Dashboard opened; keep that tab to control OpenClaw.\"": "\"初始化完成！已打开控制面板；保持该标签页以控制 OpenClaw。\\n\\n🔗 汉化版官网：https://openclaw.qt.cool/\"",
+    "\"Onboarding complete. Web UI seeded in the background; open it anytime with the dashboard link above.\"": "\"初始化完成！Web UI 已在后台准备就绪；随时可用上面的链接打开。\\n\\n🔗 汉化版官网：https://openclaw.qt.cool/\"",
+    "\"Onboarding complete. Use the dashboard link above to control OpenClaw.\"": "\"初始化完成！使用上面的链接打开控制面板。\\n\\n🔗 汉化版官网：https://openclaw.qt.cool/\"",
     "\"Web search (optional)\"": "\"网页搜索（可选）\""
   }
 }
