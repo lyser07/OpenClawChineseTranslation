@@ -333,8 +333,10 @@ npm install -g @qingchencloud/openclaw-updater
   <img src="docs/image/wx_02.png" alt="微信交流2群" width="200px">
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="docs/image/wx_03.png" alt="微信交流3群" width="200px">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/image/wx_04.png" alt="微信交流4群" width="200px">
   <br>
-  <em>1群和2群即将满员，请优先扫码加入3群 | 碰到问题也可以直接在群内反馈</em>
+  <em>1群、2群、3群均已满200人，请扫码加入4群 | 碰到问题也可以直接在群内反馈</em>
 </p>
 
 ---
